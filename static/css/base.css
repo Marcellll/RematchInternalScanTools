@@ -1,0 +1,30 @@
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+
+p {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    margin-bottom: 0;
+}
+
+.pesee_rerun {
+    background-color: #dfe6e9;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.pesee_rerun p{
+    padding: 0;
+    margin: 0;
+}
+
+.delete_rerun{
+    float: right;
+    height: 4.5rem;
+}
+
+.delete_rerun_image{
+    height: 1.5em;
+}

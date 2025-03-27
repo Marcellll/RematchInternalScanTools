@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}{{order.id_lot.lot}}{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} {{ message.tags }} mt-4" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }} 
+        <button type="submit" id="validate_pesee">Valider</button>
+    </form>
+
+    {% for pesee in rerun %}
+    <div class="pesee_rerun">
+        <form action="{% url "delete_rerun" pesee.id %}" method='post'>
+            {% csrf_token %}
+            <button class="delete_rerun">
+                <img class="delete_rerun_image" src="{% static "images/delete.png" %}" alt="delete">    
+            </button>
+        </form>
+        <p>Numéro de pesée: {{pesee.id_pesee_production.numero_pesee}} - {{pesee.id_pesee_production.id_article.description_article}} </p>
+        <p>Lot: {{pesee.id_ordre_fabrication_rerun.id_lot.lot}} </p>
+        <p>Date Re-run: {{ pesee.date_rerun|date:"d-m-Y" }} | {{ pesee.heure_rerun|date:"H:i"}}</p>   
+        
+    </div>
+    {% endfor %}
+
+{% endblock content %}

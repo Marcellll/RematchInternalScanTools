@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-fy9ndh2k#_o^44gbslb!x)m06-41g56r(k3oh^z)$2w15vo9lt
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,8 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #Third-Party
+    "crispy_forms", # new
+    "crispy_bootstrap5",
     #Local
     'accounts.apps.AccountsConfig',
+    'menu.apps.MenuConfig',
+    'rerun.apps.RerunConfig',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +61,7 @@ ROOT_URLCONF = 'ScanToolsProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,8 +85,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ERP',
         'USER' : 'postgres',
-        'PASSWORD' : 'Rematch2025!',
-        'HOST' : 'localhost',
+        'PASSWORD' : 'admin',
+        'HOST' : '192.168.1.49',
         'PORT' : 5432,
     }
 }
@@ -129,3 +134,19 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+LOGIN_REDIRECT_URL = 'menu'
+LOGOUT_REDIRECT_URL = 'login'
+
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
+#django-crispy-forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+
+# DateTiem Formatting
+DATE_FORMAT = 'd-m-Y'
+TIME_FORMAT = 'H:i:s'
+DATETIME_FORMAT = 'Y-m-d H:i:s'

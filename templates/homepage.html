@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+
+{% block title %}Menu Principal{% endblock title %}
+
+{% block content %}
+
+    <div>
+        <button>
+            <a href="{% url "re_run" %}">Rerun</a>
+        </button>
+    </div>
+    <div>
+        <button>Déconnexion</button>
+    </div>
+
+{% endblock content %}
