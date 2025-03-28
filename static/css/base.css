@@ -9,22 +9,35 @@ p {
     margin-bottom: 0;
 }
 
-.pesee_rerun {
+.listview {
     background-color: #dfe6e9;
     padding: 0.5rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
 }
-.pesee_rerun p{
+.listview p{
     padding: 0;
     margin: 0;
 }
 
-.delete_rerun{
+.delete{
     float: right;
     height: 4.5rem;
 }
 
-.delete_rerun_image{
+.delete_image{
+    height: 1.5em;
+}
+
+.add {
+    background-color: green;
+    color: white;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+}
+
+.add_image {
+    position: right;
     height: 1.5em;
 }

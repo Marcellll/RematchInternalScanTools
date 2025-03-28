@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'menu.apps.MenuConfig',
     'rerun.apps.RerunConfig',
+    'batch_management.apps.BatchManagementConfig',
 ]
 
 MIDDLEWARE = [
@@ -85,8 +86,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ERP',
         'USER' : 'postgres',
-        'PASSWORD' : 'admin',
-        'HOST' : '192.168.1.49',
+        'PASSWORD' : 'Rematch2025!',
+        'HOST' : 'localhost',
         'PORT' : 5432,
     }
 }

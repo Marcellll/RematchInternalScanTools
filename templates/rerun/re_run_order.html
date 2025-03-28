@@ -18,11 +18,11 @@
     </form>
 
     {% for pesee in rerun %}
-    <div class="pesee_rerun">
+    <div class="listview">
         <form action="{% url "delete_rerun" pesee.id %}" method='post'>
             {% csrf_token %}
-            <button class="delete_rerun">
-                <img class="delete_rerun_image" src="{% static "images/delete.png" %}" alt="delete">    
+            <button class="delete">
+                <img class="delete_image" src="{% static "images/delete.png" %}" alt="delete">    
             </button>
         </form>
         <p>Numéro de pesée: {{pesee.id_pesee_production.numero_pesee}} - {{pesee.id_pesee_production.id_article.description_article}} </p>

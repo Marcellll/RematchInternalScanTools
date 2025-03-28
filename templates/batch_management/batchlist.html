@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Batch List{% endblock title %}
+
+{% block content %}
+
+    <h1>Batch Management</h1>
+    <button class="add">
+        <img class="add_image" src="{% static "images/add.png" %}" alt="Ajouter">
+    </button>
+    {% for lot in lot %}
+    <div class="listview">
+        <a href="" class="button">
+            {{ lot.lot }} - {{ lot.description }}</a>
+    </div>
+    {% endfor %}
+
+{% endblock content %}

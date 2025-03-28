@@ -20,6 +20,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rerun/', include('rerun.urls')),
+    path("batch/", include('batch_management.urls')),
     path("", include('django.contrib.auth.urls')),
     path("", include('menu.urls')),
 ]

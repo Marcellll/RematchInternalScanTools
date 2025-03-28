@@ -5,8 +5,9 @@
 {% block content %}
 
     {% for ordre in open_ordre %}
-        <div class="pesee_rerun">
-            <a href="{% url "re_run_order" ordre.id %}" class="button">{{ ordre.id_lot.lot }} - {{ ordre.id_lot.description }}</a>
+        <div class="listview">
+            <a href="{% url "re_run_order" ordre.id %}" class="button">
+                {{ ordre.id_lot.lot }} - {{ ordre.id_lot.description }}</a>
         </div>
     {% endfor %}
 
