@@ -19,7 +19,6 @@ class Article(models.Model):
     
     def __str__(self):
         return self.description_article
-
         
 class Lot(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -34,6 +33,6 @@ class Lot(models.Model):
         db_table = 'Lot'
 
     def __str__(self):
-        return self.lot
+        return f"{self.lot}"
 
 

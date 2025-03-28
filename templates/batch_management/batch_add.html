@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}New batch{% endblock title %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger
+            {% else %}{{ message.tags }}{% endif %} 
+            {{ message.tags }} mt-4" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <h1>Nouveau Batch</h1>
+    <form method="post" action="{% url "batch_add" %}">
+        {% csrf_token %}
+        {{ newbatchforms }} 
+        <button type="submit" id="new_lot">Valider</button>
+    </form>
+
+{% endblock content %}
