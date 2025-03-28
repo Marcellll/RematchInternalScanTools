@@ -14,15 +14,12 @@
         {% endfor %}
     {% endif %}
 
-    <h1>Batch Management</h1>
-    <button class="add">
-        <img class="add_image" src="{% static "images/add.png" %}" alt="Ajouter">
-    </button>
-    {% for lot in lot %}
-    <div class="listview">
-        <a href="{% url "batchdetail" lot.id %}" class="button">
-            {{ lot.lot }} - {{ lot.description }} - {{ lot.id_article.description_article }}</a>
-    </div>
-    {% endfor %}
+    <h1>Batch Detail</h1>
+    <p>{{lot.lot}} - {{ lot.description }} | {{ lot.id_article.description_article }}</p>
+    <form method="post" action="{% url "batch_update" lot.id %}">
+        {% csrf_token %}
+        {{ batchforms }} 
+        <button type="submit" id="modification_lot">Valider</button>
+    </form>
 
 {% endblock content %}

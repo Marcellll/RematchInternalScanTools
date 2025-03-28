@@ -1,4 +1,9 @@
 from django.db import models
+from enum import Enum
+
+class FrontBack(Enum):
+    Frontend = "Front end"
+    Backend = "Back end"
 
 class Article(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -11,6 +16,10 @@ class Article(models.Model):
     class Meta:
         managed = False
         db_table = 'Article'
+    
+    def __str__(self):
+        return self.description_article
+
         
 class Lot(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -23,5 +32,8 @@ class Lot(models.Model):
     class Meta:
         managed = False
         db_table = 'Lot'
+
+    def __str__(self):
+        return self.lot
 
 
