@@ -4,6 +4,7 @@
 
 {% block content %}
 
+    <h1>Ordre de fabrication en cours pour Re-run</h1>
     {% for ordre in open_ordre %}
         <div class="listview">
             <a href="{% url "re_run_order" ordre.id %}" class="button">

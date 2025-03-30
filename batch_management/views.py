@@ -30,6 +30,7 @@ def BatchUpdate(request: HttpRequest, lot_id: int) -> HttpResponse:
             lot.description = batchforms.cleaned_data['description']
             lot.id_article = batchforms.cleaned_data['article']
             lot.save()
+            messages.success(request, f"Lot modifié avec succès")
     return render(request, 'batch_management/batch_detail.html', 
                   {'lot': lot, 'batchforms': batchforms})
 

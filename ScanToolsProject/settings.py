@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ERP',
         'USER' : 'postgres',
-        'PASSWORD' : 'Rematch2025!',
+        'PASSWORD' : 'Sasukixx1!',
         'HOST' : 'localhost',
         'PORT' : 5432,
     }
