@@ -4,15 +4,6 @@
 {% block title %}Batch List{% endblock title %}
 
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{% if message.tags == 'error' %}danger
-            {% else %}{{ message.tags }}{% endif %} 
-            {{ message.tags }} mt-4" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
 
     <h1>Batch Detail</h1>
     <p>{{lot.lot}} - {{ lot.description }} | {{ lot.id_article.description_article }}</p>

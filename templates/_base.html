@@ -12,6 +12,7 @@
             crossorigin="anonymous">
         <!-- CSS -->
         <link rel="stylesheet" href="{% static "css/base.css" %}">
+        <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.png" %}">
     </head>
 
     <body>
@@ -26,6 +27,14 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav navbar-expand me-auto mb-2 mb-md-0">
                         {% if user.is_authenticated %}
+                            {% if perms.production %}
+                                <li>
+                                    <form method="post" action="{% url "production_overview" %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Production</button>
+                                    </form>
+                                </li>
+                            {% endif %}
                             {% if perms.rerun %}
                                 <li>
                                     <form method="post" action="{% url "re_run" %}">
@@ -39,6 +48,14 @@
                                     <form method="post" action="{% url "batchlist" %}">
                                         {% csrf_token %}
                                         <button type="submit">Batch</button>
+                                    </form>
+                                </li>
+                            {% endif %}
+                            {% if perms.article %}
+                                <li>
+                                    <form method="post" action="{% url "article_list" %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Article</button>
                                     </form>
                                 </li>
                             {% endif %}
@@ -59,6 +76,15 @@
         </nav>
 
         <div class = "container">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger
+                    {% else %}{{ message.tags }}{% endif %} 
+                    {{ message.tags }} mt-4" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
             {% block content %}
             {% endblock content %}
         </div>

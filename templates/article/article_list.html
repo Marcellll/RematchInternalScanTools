@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Article{% endblock title %}
+
+{% block content %}
+
+    <h1>Article</h1>
+    <form action="{% url "article_new" %}" method="post">
+        {% csrf_token %}
+        <button class="add">
+            <img class="add_image" src="{% static "images/add.png" %}" alt="Ajouter">
+        </button>
+    </form>
+    
+    {% for article in article %}
+    <div class="listview">
+        <a href="{% url "article_detail" article.id %}" class="button">
+            {{ article.description_article }}</a>
+    </div>
+    {% endfor %}
+
+{% endblock content %}

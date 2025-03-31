@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Article {{article.description}}{% endblock title %}
+
+{% block content %}
+
+    <h1>Article</h1>
+    <p>{{ article.description_article }} | {{ article.numero_article }}</p>
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form }} 
+        <button type="submit" id="modification_article">Valider</button>
+    </form>
+
+{% endblock content %}
