@@ -25,8 +25,17 @@ p {
     height: 4.5rem;
 }
 
+.delete_nomenclature{
+    float: right;
+    height: 2rem;
+}
+
 .delete_image{
     height: 1.5em;
+}
+
+.delete_image_nomenclature{
+    height: 0.5em;
 }
 
 .add {

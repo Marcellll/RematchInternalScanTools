@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}{{ of.id_lot.lot }}{% endblock title %}
+
+{% block content %}
+
+    <h1>Production Detail</h1>
+    <p>{{of.id_lot.lot}} - {{of.id_lot.description}}</p>
+    <form action="{% url "production_nomenclature" of.id %}" method="post">
+        {% csrf_token %}
+        <button class="add">
+            <img class="add_image" src="{% static "images/article.png" %}" alt="Ajouter">
+            Article
+        </button>
+    </form>
+    <form method="post" action="{% url "production_update" of.id %}">
+        {% csrf_token %}
+        {{ offorms }} 
+        <button type="submit" id="modification_of">Valider</button>
+    </form>
+
+{% endblock content %}

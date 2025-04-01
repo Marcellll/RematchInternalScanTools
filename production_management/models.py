@@ -5,12 +5,16 @@ class FrontBack(Enum):
     Frontend = "Front end"
     Backend = "Back end"
 
+class StatusOF(Enum):
+    CREE= "Crée"
+    PLANIFIE = "Planifié"
+    TERMINE = "Terminé"
+
 class Article(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
     numero_article = models.BigIntegerField(db_column='Numero_article')  # Field name made lowercase.
     description_article = models.TextField(db_column='Description_article')  # Field name made lowercase.
     front_back = models.TextField(db_column='Front/Back', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    nomenclature = models.BigIntegerField(db_column='Nomenclature', blank=True, null=True)  # Field name made lowercase.
     categorie = models.TextField(db_column='Categorie', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:
@@ -18,7 +22,7 @@ class Article(models.Model):
         db_table = 'Article'
     
     def __str__(self):
-        return self.description_article
+        return f"{self.numero_article} - {self.description_article}"
         
 class Lot(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -33,6 +37,34 @@ class Lot(models.Model):
         db_table = 'Lot'
 
     def __str__(self):
-        return f"{self.lot}"
+        return f"{self.lot} - {self.description}"
+    
+class OrdreFabrication(models.Model):
 
+    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id_lot = models.ForeignKey(Lot, models.DO_NOTHING, db_column='ID_Lot', blank=True, null=True)  # Field name made lowercase.
+    date_debut = models.DateField(db_column='Date_debut', blank=True, null=True)  # Field name made lowercase.
+    date_fin = models.DateField(db_column='Date_fin', blank=True, null=True)  # Field name made lowercase.
+    status_of = models.TextField(db_column='Status_OF', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Ordre_fabrication'
+    
+    def __str__(self):
+        return f"{self.id} - {self.status_of}"
+
+class ArticleParLot(models.Model):
+    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id_ordre_fabrication = models.ForeignKey(OrdreFabrication, models.DO_NOTHING, db_column='ID_Ordre_fabrication', blank=True, null=True)  # Field name made lowercase.
+    id_article = models.ForeignKey(Article, models.DO_NOTHING, db_column='ID_Article', blank=True, null=True)  # Field name made lowercase.
+    date_creation = models.DateField(db_column='Date_creation', blank=True, null=True, auto_now_add=True)  # Field name made lowercase.
+    heure_creation = models.TimeField(db_column='Heure_creation', blank=True, null=True, auto_now_add=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Article_par_lot'
+
+    def __str__(self):
+        return f"{self.id_ordre_fabrication.id_lot.lot} - {self.id_article.description_article}"
 

@@ -150,6 +150,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 # DateTiem Formatting
-DATE_FORMAT = 'd-m-Y'
+DATE_FORMAT = ['%d-%m-%Y']
 TIME_FORMAT = 'H:i:s'
 DATETIME_FORMAT = 'Y-m-d H:i:s'

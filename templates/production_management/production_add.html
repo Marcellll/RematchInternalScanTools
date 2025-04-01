@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Nouvel OF{% endblock title %}
+
+{% block content %}
+
+    <h1>Nouvel Ordre de fabrication</h1>
+    <form method="post" action="{% url "production_add" %}">
+        {% csrf_token %}
+        {{ OFforms }} 
+        <button type="submit" id="new_of">Valider</button>
+    </form>
+
+{% endblock content %}

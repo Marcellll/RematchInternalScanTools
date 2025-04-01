@@ -10,7 +10,6 @@ class Article(models.Model):
     numero_article = models.BigIntegerField(db_column='Numero_article')  # Field name made lowercase.
     description_article = models.TextField(db_column='Description_article')  # Field name made lowercase.
     front_back = models.TextField(db_column='Front/Back', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    nomenclature = models.BigIntegerField(db_column='Nomenclature', blank=True, null=True)  # Field name made lowercase.
     categorie = models.TextField(db_column='Categorie', blank=True, null=True)  # Field name made lowercase.
 
     class Meta:

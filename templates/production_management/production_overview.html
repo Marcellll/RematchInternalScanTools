@@ -1,9 +1,35 @@
 {% extends "_base.html" %}
+{% load static %}
 
 {% block title %}Production{% endblock title %}
 
 {% block content %}
 
     <h1>Production</h1>
+    <form action="{% url "production_new" %}" method="post">
+        {% csrf_token %}
+        <button class="add">
+            <img class="add_image" src="{% static "images/add.png" %}" alt="Ajouter">
+        </button>
+    </form>
 
+    <h4>Production planifié</h4>
+    {% for planifie in of_planifie %}
+    <div class="listview">
+        <a href="{% url "production_detail" planifie.id %}" class="button">
+            {{ planifie.id_lot.lot }} - {{ planifie.id_lot.description }}</a>
+        <p>Date début : {{ planifie.date_debut }}</p>
+        <p>Date fin : {{ planifie.date_fin }}</p>
+    </div>
+    {% endfor %}
+
+    <h4>Production terminée</h4>
+    {% for planifie in of_termine %}
+    <div class="listview">
+        <a href="{% url "production_detail" planifie.id %}" class="button">
+            {{ planifie.id_lot.lot }} - {{ planifie.id_lot.description }}</a>
+        <p>Date début : {{ planifie.date_debut }}</p>
+        <p>Date fin : {{ planifie.date_fin }}</p>
+    </div>
+    {% endfor %}
 {% endblock content %}

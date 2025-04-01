@@ -1,3 +1,8 @@
 from django.contrib import admin
+from .models import OrdreFabrication
 
-# Register your models here.
+class OrdreFabricationAdmin(admin.ModelAdmin):
+    list_display = ('id_lot__lot', 'status_of')
+    list_select_related = ('id_lot',)
+
+admin.site.register(OrdreFabrication, OrdreFabricationAdmin)
