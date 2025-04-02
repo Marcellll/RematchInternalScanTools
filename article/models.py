@@ -17,7 +17,7 @@ class Article(models.Model):
         db_table = 'Article'
 
     def __str__(self):
-        return self.description_article
+        return f"{self.numero_article} - {self.description_article}"
     
 class Nomenclature(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -27,3 +27,6 @@ class Nomenclature(models.Model):
     class Meta:
         managed = False
         db_table = 'Nomenclature'
+
+    def __str__(self):
+        return f"{self.id_article.description_article} - {self.id_nomenclature.description_article}"

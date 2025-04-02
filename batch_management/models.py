@@ -1,23 +1,7 @@
 from django.db import models
-from enum import Enum
 
-class FrontBack(Enum):
-    Frontend = "Front end"
-    Backend = "Back end"
+from article.models import Article, FrontBack
 
-class Article(models.Model):
-    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
-    numero_article = models.BigIntegerField(db_column='Numero_article')  # Field name made lowercase.
-    description_article = models.TextField(db_column='Description_article')  # Field name made lowercase.
-    front_back = models.TextField(db_column='Front/Back', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    categorie = models.TextField(db_column='Categorie', blank=True, null=True)  # Field name made lowercase.
-
-    class Meta:
-        managed = False
-        db_table = 'Article'
-    
-    def __str__(self):
-        return self.description_article
         
 class Lot(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
@@ -32,6 +16,6 @@ class Lot(models.Model):
         db_table = 'Lot'
 
     def __str__(self):
-        return f"{self.lot}"
+        return f"{self.lot} - {self.description}"
 
 
