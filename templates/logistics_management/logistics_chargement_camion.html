@@ -1,0 +1,54 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Camion/Chargement{% endblock title %}
+
+{% block content %}
+
+    <h1>Camion pour chargement</h1>
+
+    <form method="post" action="{% url "logistics_chargement_update" chargement.id %}">
+        {% csrf_token %}
+        {{ form }} 
+        <button type="submit" id="modification_chargement">Valider</button>
+    </form>
+
+    <form action="{% url "logistics_chargement_camion_add" chargement.id %}" method="post">
+        {% csrf_token %}
+        <button class="add">
+            <img class="add_image" src="{% static "images/camion.png" %}" alt="Ajouter">
+            Nouveau camion
+        </button>
+    </form>
+
+    {% for camion in camion %}
+    <div class="listview">
+        {% if not camion.poids_in and not camion.poids_out and not camion.poids_net%}
+            <form action="{% url "logistics_chargement_delete" chargement.id camion.id %}" method='post'>
+                {% csrf_token %}
+                <button class="delete">
+                    <img class="delete_image" src="{% static "images/delete.png" %}" alt="delete">    
+                </button>
+            </form>
+        {% endif %}
+        
+        <a href="" class="button">
+            Camion: {{ camion.description }} 
+            {% if camion.numero_interne %}
+            - Numéro interne: {{ camion.numero_interne }}
+            {% endif %}<a>
+        <p>Poids entrée : {{ camion.poids_in }} 
+            {% if camion.date_entree %}
+            le {{ camion.date_entree }} à {{ camion.heure_entree }}
+            {% endif %}</p>
+        <p>Poids sortie : {{ camion.poids_out }}
+            {% if camion.date_sortie %}
+            le {{ camion.date_sortie }} à {{ camion.heure_sortie }}
+            {% endif %}</p>
+        {% if camion.poids_net %}
+        <p>Poids net: {{ camion.poids_net }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+{% endblock content %}

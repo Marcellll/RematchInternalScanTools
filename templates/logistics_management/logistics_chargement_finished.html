@@ -6,7 +6,7 @@
 {% block content %}
 
     <h1>Logistique</h1>
-    <h4>Chargement/Déchargement planifié</h4>
+    <h4>Chargement/Déchargement terminé</h4>
     {% for chargement in chargement %}
     <div class="listview">
         <a href="{% url "logistics_chargement_camion" chargement.id %}" class="button">
@@ -17,11 +17,11 @@
     </div>
     {% endfor %}
 
-    <form action="{% url "logistics_chargement_finished" %}" method="post">
+    <form action="{% url "logistics_overview" %}" method="post">
         {% csrf_token %}
         <button class="add">
             <img class="add_image" src="{% static "images/camion.png" %}" alt="Ajouter">
-            Chargements terminés
+            Chargements planifiés
         </button>
     </form>
 
