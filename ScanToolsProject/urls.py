@@ -23,6 +23,7 @@ urlpatterns = [
     path('rerun/', include('rerun.urls')),
     path("batch/", include('batch_management.urls')),
     path("production/", include('production_management.urls')),
+    path("logistics/", include('logistics_management.urls')),
     path("", include('django.contrib.auth.urls')),
     path("", include('menu.urls')),
 ]

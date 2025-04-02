@@ -35,11 +35,11 @@
                                     </form>
                                 </li>
                             {% endif %}
-                            {% if perms.rerun %}
+                            {% if perms.logistics %}
                                 <li>
-                                    <form method="post" action="{% url "re_run" %}">
+                                    <form method="post" action="{% url "logistics_overview" %}">
                                         {% csrf_token %}
-                                        <button type="submit">Re-run</button>
+                                        <button type="submit">Logistique</button>
                                     </form>
                                 </li>
                             {% endif %}
@@ -56,6 +56,14 @@
                                     <form method="post" action="{% url "article_list" %}">
                                         {% csrf_token %}
                                         <button type="submit">Article</button>
+                                    </form>
+                                </li>
+                            {% endif %}
+                            {% if perms.rerun %}
+                                <li>
+                                    <form method="post" action="{% url "re_run" %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Re-run</button>
                                     </form>
                                 </li>
                             {% endif %}

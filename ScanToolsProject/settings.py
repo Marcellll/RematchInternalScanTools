@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rerun.apps.RerunConfig',
     'batch_management.apps.BatchManagementConfig',
     'production_management.apps.ProductionManagementConfig',
+    'logistics_management.apps.LogisticsManagementConfig',
 ]
 
 MIDDLEWARE = [
