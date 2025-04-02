@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 import pdb
 from .forms import CreateOFForms, UpdateOFForms, AddNomenclature
-from .models import OrdreFabrication, StatusOF, ArticleParLot
+from .models import OrdreFabrication, StatusOF, ArticleParLot, Nomenclature
 
 @login_required(login_url='/login')
 def ProductionOverview(request: HttpRequest) -> HttpResponse:
@@ -30,13 +30,22 @@ def ProductionAdd(request: HttpRequest) -> HttpResponse:
         of.date_debut = newofforms.cleaned_data['date_debut']
         of.date_fin = newofforms.cleaned_data['date_fin']
         of.status_of = StatusOF.PLANIFIE.value
+        #Checking that the dates are set correctly
         if of.date_fin < of.date_debut:
             messages.error(request, f"La date de début ne peut pas être après la date de fin")
             return ProductionNew(request)
+        #Check that the batch has a field type
         if of.id_lot.id_article == None:
             messages.error(request, f"Aucun type de d'article est rattaché au lot: {of.id_lot.lot}")
             return ProductionNew(request)
         of.save()
+        #Create the bom after creating the OF
+        nomenclature = Nomenclature.objects.filter(id_article=of.id_lot.id_article)
+        for article in nomenclature:
+            articleParLot = ArticleParLot()
+            articleParLot.id_ordre_fabrication = of
+            articleParLot.id_article = article.id_nomenclature
+            articleParLot.save()
         messages.success(request, f"Ordre de fabrication pour le lot {of.id_lot.lot} a été crée")
         return redirect('production_overview')
     messages.error(request, f"Une erreur est survenue: {newofforms.errors.as_text()} ")
@@ -80,6 +89,7 @@ def ProductionNomenclature(request: HttpRequest, id_of: int) -> HttpResponse:
 @login_required(login_url='/login')
 def ProductionNomenclatureAdd(request: HttpRequest, id_of: int) -> HttpResponse:
     if request.method == 'POST':
+        of = OrdreFabrication.objects.get(id=id_of)
         nomenclatureForm = AddNomenclature(request.POST)
         if nomenclatureForm.is_valid():
             of = OrdreFabrication.objects.get(id=id_of)
@@ -87,7 +97,7 @@ def ProductionNomenclatureAdd(request: HttpRequest, id_of: int) -> HttpResponse:
             articleParLot.id_ordre_fabrication = of
             articleParLot.id_article = nomenclatureForm.cleaned_data['article']
             articleParLot.save()
-            messages.success(request, f"L'article {articleParLot.id_article} a été ajouté à l'ordre de fabrication pour le lot {id_of}")
+            messages.success(request, f"L'article {articleParLot.id_article} a été ajouté à l'ordre de fabrication pour le lot {of.id_lot.lot} - {of.id_lot.description}")
         else:
             messages.error(request, "Une erreur est survenue")
     return redirect('production_nomenclature', id_of=id_of)

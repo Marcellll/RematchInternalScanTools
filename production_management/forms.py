@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 from .models import Article, Lot, StatusOF, FrontBack
 
 class CreateOFForms(forms.Form):
-     lot = forms.ModelChoiceField(queryset=Lot.objects.filter(ordrefabrication__isnull=True),
+     lot = forms.ModelChoiceField(queryset=Lot.objects.filter(ordrefabrication__isnull=True).order_by('lot'),
                                      label='Lot')
      date_debut = forms.DateField(initial=datetime.today,
                                   label='Date début')

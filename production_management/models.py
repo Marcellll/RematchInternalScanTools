@@ -53,6 +53,19 @@ class OrdreFabrication(models.Model):
     
     def __str__(self):
         return f"{self.id} - {self.status_of}"
+    
+class Nomenclature(models.Model):
+    id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
+    id_article = models.ForeignKey(Article, models.DO_NOTHING, related_name='article_a_nomenclature', db_column='ID_Article', blank=True, null=True)  # Field name made lowercase.
+    id_nomenclature = models.ForeignKey(Article, models.DO_NOTHING, related_name='article_de_nomenclature', db_column='ID_Nomenclature', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'Nomenclature'
+
+    def __str__(self):
+        return f"{self.id_article.description_article} - {self.id_nomenclature.description_article}"
+    
 
 class ArticleParLot(models.Model):
     id = models.BigAutoField(db_column='ID', primary_key=True)  # Field name made lowercase.
