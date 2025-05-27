@@ -9,7 +9,7 @@ class BatchForms(forms.Form):
                                      required=False)
     
 class NewBatchForms(forms.Form):
-    lot = forms.IntegerField(label='Numéro de lot', initial=Lot.objects.filter(lot__startswith=330).order_by('-lot').first().lot+1)
+    lot = forms.IntegerField(label='Numero de lot', initial=Lot.objects.filter(lot__startswith=330).order_by('-lot').first().lot+1)
     description = forms.CharField(label='Description')
     article = forms.ModelChoiceField(queryset=Article.objects.filter(front_back=FrontBack.Frontend.value),
                                      label='Article',

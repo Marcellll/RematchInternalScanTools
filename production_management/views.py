@@ -8,12 +8,12 @@ from .models import OrdreFabrication, StatusOF, ArticleParLot, Nomenclature
 
 @login_required(login_url='/login')
 def ProductionOverview(request: HttpRequest) -> HttpResponse:
-    production_planifié = OrdreFabrication.objects.filter(status_of=StatusOF.PLANIFIE.value).order_by('date_debut')
-    production_terminée = OrdreFabrication.objects.filter(status_of=StatusOF.TERMINE.value).order_by('-date_debut')
+    production_planifie = OrdreFabrication.objects.filter(status_of=StatusOF.PLANIFIE.value).order_by('date_debut')
+    production_terminee = OrdreFabrication.objects.filter(status_of=StatusOF.TERMINE.value).order_by('-date_debut')
     return render(request, 'production_management/production_overview.html',
                   {
-                      'of_planifie': production_planifié,
-                      'of_termine' : production_terminée
+                      'of_planifie': production_planifie,
+                      'of_termine' : production_terminee
                   })
 
 @login_required(login_url='/login')

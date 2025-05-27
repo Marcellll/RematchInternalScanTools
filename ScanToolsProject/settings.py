@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'batch_management.apps.BatchManagementConfig',
     'production_management.apps.ProductionManagementConfig',
     'logistics_management.apps.LogisticsManagementConfig',
+    'inventory_management.apps.InventoryManagementConfig',
 ]
 
 MIDDLEWARE = [
@@ -89,7 +90,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ERP',
         'USER' : 'postgres',
-        'PASSWORD' : 'Rematch2025!',
+        'PASSWORD' : 'Sasukixx1!',
         'HOST' : 'localhost',
         'PORT' : 5432,
     }

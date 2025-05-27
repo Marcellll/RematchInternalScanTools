@@ -43,6 +43,14 @@
                                     </form>
                                 </li>
                             {% endif %}
+                            {% if perms.inventory %}
+                                <li>
+                                    <form method="post" action="{% url "logistics_overview" %}">
+                                        {% csrf_token %}
+                                        <button type="submit">Inventaire</button>
+                                    </form>
+                                </li>
+                            {% endif %}
                             {% if perms.batch_management %}
                                 <li>
                                     <form method="post" action="{% url "batchlist" %}">
