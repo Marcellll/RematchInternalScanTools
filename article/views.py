@@ -3,8 +3,8 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
-from .models import Article, FrontBack
-from .forms import ArticleForms
+from .models import Article, FrontBack, Nomenclature
+from .forms import ArticleForms, AddArticleToNomenclature
 
 @login_required(login_url='/login')
 def ArticleList(request: HttpRequest) -> HttpResponse:
@@ -56,3 +56,35 @@ def ArticleAdd(request: HttpRequest) -> HttpResponse:
             article.save()
             messages.success(request, f"L'article {article.numero_article} - {article.description_article} a été crée")
     return redirect('article_list')
+
+@login_required(login_url='/login')
+def ArticleNomenclature(request: HttpRequest, id_article: int) -> HttpResponse:
+    article = Article.objects.get(id=id_article)
+    nomenclature = Nomenclature.objects.filter(id_article=id_article).order_by('id_nomenclature__numero_article')
+    return render(request, 'article/article_nomenclature.html',
+                  {'article': article,
+                   'nomenclature': nomenclature,
+                   'form': AddArticleToNomenclature(id_article=id_article)})
+
+@login_required(login_url='/login')
+def ArticleNomenclatureDelete(request: HttpRequest, id_article: int, id_nomenclature: int) -> HttpResponse:
+    nomenclature = Nomenclature.objects.get(id=id_nomenclature)
+    nomenclature.delete()
+    return redirect('article_nomenclature', id_article=id_article)
+
+@login_required(login_url='/login')
+def ArticleNomenclatureAdd(request: HttpRequest, id_article: int) -> HttpResponse:
+    if request.method == 'POST':
+        articleToAddForm =  AddArticleToNomenclature(request.POST)
+        bomArticle = Article.objects.get(id=id_article)
+        if articleToAddForm.is_valid():
+            articleToAdd = Nomenclature()
+            articleToAdd.id_article = bomArticle
+            articleToAdd.id_nomenclature = articleToAddForm.cleaned_data['article']
+            articleToAdd.save()
+            messages.success(request, f"L'article {articleToAdd.id_nomenclature} à été ajouté à la nomenclature de l'article {articleToAdd.id_article}")
+        else:
+            messages.error(request, "Une erreur est survenue")
+    return redirect('article_nomenclature', id_article=id_article)
+
+    

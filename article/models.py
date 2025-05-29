@@ -15,6 +15,7 @@ class Article(models.Model):
     class Meta:
         managed = False
         db_table = 'Article'
+        ordering = ['numero_article']
 
     def __str__(self):
         return f"{self.numero_article} - {self.description_article}"
@@ -27,6 +28,7 @@ class Nomenclature(models.Model):
     class Meta:
         managed = False
         db_table = 'Nomenclature'
+        ordering = ['id_article__numero_article']
 
     def __str__(self):
         return f"{self.id_article.description_article} - {self.id_nomenclature.description_article}"

@@ -1,0 +1,28 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Nomenclature | {{article.description_article}}{% endblock title %}
+
+{% block content %}
+
+    <h1>Nomenclature | {{article.description_article}}</h1>
+
+    <form method="post" action="{% url "article_nomenclature_add" article.id %}">
+        {% csrf_token %}
+        {{ form }} 
+        <button type="submit" id="new_article_par_nomenclature">Valider</button>
+    </form>
+
+    {% for bom in nomenclature %}
+    <div class="listview">
+        <form action="{% url "article_nomenclature_delete" article.id bom.id %}" method='post'>
+            {% csrf_token %}
+            <button class="delete_nomenclature">
+                <img class="delete_image" src="{% static "images/delete.png" %}" alt="delete">    
+            </button>
+        </form>
+        <p>{{ bom.id_nomenclature.numero_article }} - {{ bom.id_nomenclature.description_article }}</p>
+    </div>
+    {% endfor %}
+
+{% endblock content %}
